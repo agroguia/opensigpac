@@ -45,7 +45,7 @@ function autocomplete(map) {
                 var latlng = L.latLng(selected_address.lat, selected_address.lng);
                 map.panTo(latlng);
                 map.setZoom(16);
-
+                $('.Search-advanced').show();
                 console.log(selected_address);
 
                 // TODO: Not always 0,0!!
