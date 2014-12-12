@@ -55,7 +55,23 @@ function PlotsLayer(map, tiledLayer, template) {
   })
 }
 
-PlotsLayer.MAX_ZOOM = 14;
+PlotsLayer.MAX_ZOOM = 15;
+PlotsLayer.DEFAULT_STYLE = {
+  fillOpacity: 0,
+  stroke: true,
+  weight: 1.5,
+  color: '#000',
+  fill: false
+}
+
+PlotsLayer.DEFAULT_STYLE_HOVER = {
+  fill: true,
+  fillOpacity: 0.5,
+  fillColor: '#FFF',
+  stroke: true,
+  weight: 2.5,
+  color: '#C00'
+}
 
 PlotsLayer.prototype = {
 
@@ -78,6 +94,8 @@ PlotsLayer.prototype = {
     _.each(this.geometries, function(g) {
       self.map.removeLayer(g);
     });
+    self.geometriesCount = {}
+    self.tile = {}
   },
 
   onTileLoaded: function(geojson, z, x, y) {
@@ -97,9 +115,29 @@ PlotsLayer.prototype = {
             });
           }
         }).addTo(self.map);
+        layerGeo.attributes = geo.Attributes;
+        layerGeo.id = geo.ID;
+        layerGeo.setStyle(PlotsLayer.DEFAULT_STYLE)
+        self.addInteraction(layerGeo);
         self.geometries[geo.ID] = layerGeo;
       }
     });
+  },
+
+  addInteraction: function(geo) {
+    geo.on('click', function() { 
+
+    })
+    geo.on('mouseover', function() { 
+      if (geo.hovered) return;
+      geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
+      geo.hovered = true;
+    })
+    geo.on('mouseout', function() { 
+      if (!geo.hovered) return;
+      geo.hovered = false;
+      geo.setStyle(PlotsLayer.DEFAULT_STYLE)
+    })
   }
 
 
