@@ -18,7 +18,10 @@
     <div id="map"></div>
     
     <!-- include cartodb.js library -->
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+    <script>L_PREFER_CANVAS = true;</script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.uncompressed.js"></script>
+    <script src="js/geo/geometry.js"></script>
+    <script src="js/plots_layer.js"></script>
     <script src="js/app.js"></script>
 
     <script>
