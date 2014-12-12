@@ -5,10 +5,14 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='css/reset.css' rel='stylesheet' type='text/css'>
+    <link href='css/app.css' rel='stylesheet' type='text/css'>
+
     <style>
       html, body, #map {
         height: 100%;
-        padding: 0;
+        padding: 0;i
         margin: 0;
       }
     </style>
@@ -26,6 +30,34 @@
         <input id="parcela" style="width:300px"></input>  
     </div>
     <div id="map"></div>
+
+
+    <div class="Search">
+        <div class="Search-input">
+          <input type="text" name="text" class="Search-input-txt" value="Villanueva" />
+          <a href="#" class="Search-action-dropdown"></a>
+          <div class="Search-actions">
+            <button class="Search-actions-search"></button>
+          </div>
+        </div>
+        <div class="Search-advanced">
+          <ul class="Search-advanced-list">
+            <li class="active">
+              <span class="Search-advanced-label">Polígono</span>
+              <input type="text" name="text" class="Search-advanced-txt" value="Villanueva" />
+            </li>
+            <li>
+              <span class="Search-advanced-label">Parcela</span>
+              <input type="text" name="text" class="Search-advanced-txt" value="Villanueva" />
+            </li>
+            <li>
+              <span class="Search-advanced-label">Recinto</span>
+              <input type="text" name="text" class="Search-advanced-txt" value="Villanueva" />
+            </li>
+          </ul>
+        </div>
+    </div>
+
     
     <!-- include cartodb.js library -->
     <script>L_PREFER_CANVAS = true;</script>
