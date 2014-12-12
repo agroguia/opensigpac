@@ -2,7 +2,7 @@ Types = {}
 Types.Geometry = {
   DoublePoint: function() {
     return {
-      type: 'point',
+      type: 'Point',
       X: 0, Y: 0
     }
   }
@@ -10,7 +10,7 @@ Types.Geometry = {
 
 Types.Geometry.DoubleLine = function() { 
   return {
-    type: 'linestring',
+    type: 'LineString',
     coordinates: [],
     Add: function(p) {
       this.coordinates.push([p.X, p.Y]);
@@ -20,7 +20,7 @@ Types.Geometry.DoubleLine = function() {
 
 Types.Geometry.DoublePolygon = function() { 
   return {
-    type: 'polygon',
+    type: 'Polygon',
     coordinates: [],
     Add: function(p) {
       this.coordinates.push(p.coordinates);
@@ -369,7 +369,6 @@ var IO = {};
         //	}
         SerializationReader.prototype.ReadObjType = function () {
             var typeByte = this.ReadByte();
-            console.log(typeByte);
             switch (typeByte) {
                 case 0:
                     return 0 /* nullType */;
@@ -418,10 +417,8 @@ var IO = {};
             var reader = new IO.SerializationReader(buf);
 
             var v = reader.ReadObject();
-            console.log("reader " + v);
             if (v === 0) {
                 var n = reader.ReadObject();
-                console.log("reading objects " + n);
                 for (var i = 0; i < n; i++) {
                     list.push(BinaryGeometrySerializer.ReadEntity(reader));
                 }
@@ -731,7 +728,68 @@ var IO = {};
 })(IO || (IO = {}));
 
 
+function Base64Binary() {
+}
+/* will return a  Uint8Array type */
+Base64Binary.decodeArrayBuffer = function (input) {
+    var byteLength = (input.length / 4) * 3;
+    var ab = new ArrayBuffer(byteLength);
+    ab = Base64Binary.decode(input, ab);
 
+    return ab;
+};
+
+Base64Binary.decode = function (input, arrayBuffer) {
+    //get last chars to see if are valid
+    var lkey1 = Base64Binary.keyStr.indexOf(input.charAt(input.length - 1));
+    var lkey2 = Base64Binary.keyStr.indexOf(input.charAt(input.length - 2));
+
+    var bytes = (input.length / 4) * 3;
+    if (lkey1 == 64)
+        bytes--; //padding chars, so skip
+    if (lkey2 == 64)
+        bytes--; //padding chars, so skip
+
+    var uarray;
+    var chr1, chr2, chr3;
+    var enc1, enc2, enc3, enc4;
+    var i = 0;
+    var j = 0;
+
+    if (arrayBuffer)
+        uarray = new Uint8Array(arrayBuffer);
+    else
+        uarray = new Uint8Array(bytes);
+
+    input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+    for (i = 0; i < bytes; i += 3) {
+        //get the 3 octects in 4 ascii chars
+        enc1 = Base64Binary.keyStr.indexOf(input.charAt(j++));
+        enc2 = Base64Binary.keyStr.indexOf(input.charAt(j++));
+        enc3 = Base64Binary.keyStr.indexOf(input.charAt(j++));
+        enc4 = Base64Binary.keyStr.indexOf(input.charAt(j++));
+
+        chr1 = (enc1 << 2) | (enc2 >> 4);
+        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+        chr3 = ((enc3 & 3) << 6) | enc4;
+
+        uarray[i] = chr1;
+        if (enc3 != 64)
+            uarray[i + 1] = chr2;
+        if (enc4 != 64)
+            uarray[i + 2] = chr3;
+    }
+
+    return uarray;
+};
+Base64Binary.keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+Types.Base64Binary = Base64Binary;
+
+
+
+/*
 // example usage in node
 var fs = require('fs');
 var s = IO.BinaryGeometrySerializer
@@ -741,6 +799,6 @@ var d = new Buffer(file, 'base64');
 console.log(d);
 /*var d = Types.Base64Binary.decodeArrayBuffer(new Buffer(file))
 console.log(d);
-*/
 var r = s.Read(d);
 console.log(r[0].geometry.coordinates);
+*/
