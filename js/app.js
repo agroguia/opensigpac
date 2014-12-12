@@ -1,8 +1,3 @@
-
-
-
-
-
 var opensigpac = function() {
 
   var map = new L.Map('map', {
@@ -15,6 +10,6 @@ var opensigpac = function() {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
   });
   layer.addTo(map);
-
-
+    
+  autocomplete_addr($("#localidad"), function() {});
 }
