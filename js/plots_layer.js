@@ -89,6 +89,11 @@ PlotsLayer.prototype = {
     });
   },
 
+  interaction: function(_) {
+    this._interactionCallback = _;
+    return this;
+  },
+
   removeAll: function() {
     var self = this;
     _.each(this.geometries, function(g) {
@@ -125,9 +130,21 @@ PlotsLayer.prototype = {
   },
 
   addInteraction: function(geo) {
-    geo.on('click', function() { 
-
-    })
+    var self = this;
+    geo.on('click', function(e) { 
+      var a = geo.attributes;
+      self._interactionCallback && self._interactionCallback(
+      {
+        provincia: a[0],
+        municipio: a[1],
+        aggr: a[2],
+        zona: a[3],
+        poligono: a[4],
+        parcela: a[5],
+        recinto: a[6],
+        latLng: e.latlng
+      });
+    });
     geo.on('mouseover', function() { 
       if (geo.hovered) return;
       geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
