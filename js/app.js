@@ -17,9 +17,15 @@ var opensigpac = function() {
     tms: true
   });
 
-  var plots = new PlotsLayer(map, satellite, 'http://opensigpac.cartodb.net/vectorsdg/vector/PARCELA@3857/{z}.{x}.{y}.gzip');
+  var plots = new PlotsLayer(map, satellite, 'http://opensigpac.cartodb.net/vectorsdg/vector/RECINTO@3857/{z}.{x}.{y}.gzip');
 
   layer.addTo(map);
+
+  plots.interaction(function(a) {
+    interaction(a, function(data) {
+      openInfowindow(infowindow, a.latLng, data);
+    })
+  });
 
   map.on('zoomend', function() {
     if (map.getZoom() >= 15) {
@@ -31,6 +37,8 @@ var opensigpac = function() {
       plots.removeAll();
     }
   });
+
+  var infowindow = createInfowindow(map);
 
 
 };
