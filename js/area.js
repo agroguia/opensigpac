@@ -1,11 +1,11 @@
 
 
-function areaControls(map) {
+function areaControls(map, drawStart, drawStop) {
   var featureGroup = L.featureGroup().addTo(map);
   var drawControl = new L.Control.Draw({
-    edit: {
+    /*edit: {
       featureGroup: featureGroup
-    },
+    },*/
     draw: {
       polygon: true,
       polyline: false,
@@ -20,6 +20,7 @@ function areaControls(map) {
       showPolygonArea({ layer: layer });
     });
   }
+
   function showPolygonArea(e) {
     featureGroup.clearLayers();
     featureGroup.addLayer(e.layer);
@@ -29,4 +30,6 @@ function areaControls(map) {
 
   map.on('draw:created', showPolygonArea);
   map.on('draw:edited', showPolygonAreaEdited);
+  map.on('draw:drawstart', drawStart)
+  map.on('draw:drawstop', drawStop)
 }

@@ -8,6 +8,7 @@ function PlotsLayer(map, tiledLayer, template) {
   this.geometriesCount = {}
   this.geometries = {}
   this.tile = {}
+  this._interactionEnabled = true;
 
   var zxyRe = /\/(\d+)[\/\.](\d+)[\/\.](\d+)\..../;
 
@@ -132,6 +133,7 @@ PlotsLayer.prototype = {
   addInteraction: function(geo) {
     var self = this;
     geo.on('click', function(e) { 
+      if (!self._interactionEnabled) return;
       var a = geo.attributes;
       self._interactionCallback && self._interactionCallback(
       {
@@ -146,15 +148,25 @@ PlotsLayer.prototype = {
       });
     });
     geo.on('mouseover', function() { 
+      if (!self._interactionEnabled) return;
       if (geo.hovered) return;
       geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
       geo.hovered = true;
     })
     geo.on('mouseout', function() { 
+      if (!self._interactionEnabled) return;
       if (!geo.hovered) return;
       geo.hovered = false;
       geo.setStyle(PlotsLayer.DEFAULT_STYLE)
     })
+  },
+
+  enableInteraction: function() {
+    this._interactionEnabled = true;
+  }, 
+
+  disableInteraction: function() {
+    this._interactionEnabled = false;
   }
 
 
