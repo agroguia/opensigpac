@@ -1,8 +1,3 @@
-
-
-
-
-
 var opensigpac = function() {
 
   var SATELLITE = 'http://sigpac.magrama.es/sdg/raster/ORTOFOTOS@3857/{z}.{x}.{y}.img'
