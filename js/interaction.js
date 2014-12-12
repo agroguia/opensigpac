@@ -51,7 +51,8 @@ function openInfowindow(infowindow, pos, data) {
   infowindow.set("latlng", [pos.lat, pos.lng]);
   var fields = []
   for (var k in data) {
-    if (k !== 'provincia' && k !== 'municipio') {
+    if (k !== 'provincia' && k !== 'municipio' &&
+     k !== 'agregado' && k !== 'zona') {
       fields.push({
         title: k,
         alternative_name: null,
