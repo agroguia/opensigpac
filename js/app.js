@@ -21,12 +21,6 @@ var opensigpac = function() {
 
   layer.addTo(map);
     
-  autocomplete_addr($("#localidad"), function() {
-      var latlng = L.latLng(selected_address.lat, selected_address.lng);
-      map.panTo(latlng);
-      map.setZoom(16);
-    });
-
   map.on('zoomend', function() {
     if (map.getZoom() >= 15) {
       satellite.addTo(map);
@@ -36,7 +30,11 @@ var opensigpac = function() {
       map.removeLayer(satellite);
       plots.removeAll();
     }
-  });    
+  });
+    
+  // Autocomplete stuff. We need the map to center the view after a search
+  autocomplete(map);
+    
 };
 
 
