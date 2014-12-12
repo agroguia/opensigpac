@@ -5,7 +5,7 @@ var opensigpac = function() {
   var map = new L.Map('map', {
     zoomControl: true,
     center: [41.652947, -4.728388],
-    zoom: 6
+    zoom: 12
   });
 
   var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
@@ -35,7 +35,6 @@ var opensigpac = function() {
       layer.addTo(map);
       map.removeLayer(satellite);
       plots.removeAll();
-
     }
   });    
 };
