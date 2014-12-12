@@ -1,0 +1,34 @@
+proxy_cache_path /data/nginx/cache keys_zone=one:10m;
+
+#proxy_cache_path /data/nginx/cache keys_zone=one:10m
+#                 loader_threshold=300 loader_files=200
+#                 max_size=200m;
+
+server {
+  listen 80;
+  server_name tiles.opensigpac.lan opensigpac.cartodb.net;
+
+  proxy_cache one;
+
+  location /favicon.ico {
+    return 404;
+  }
+
+  location / {
+    resolver 8.8.8.8;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_set_header Host sigpac.magrama.es;
+    proxy_redirect off;
+
+    add_header Access-Control-Allow-Origin *;
+    #proxy_cache_valid any   1m;
+    #proxy_cache_min_uses 3;
+    #proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
+    proxy_pass http://sigpac.magrama.es;
+  }
+
+  access_log /var/log/nginx/opensigpac.access.log combined;
+  error_log /var/log/nginx/opensigpac.access.log;
+}
