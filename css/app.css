@@ -1,0 +1,104 @@
+.Search {
+  /*background: rgb(255, 255, 255);*/
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+  .Search-input {
+    width: 400px;
+    background: #fff;
+    border-radius: 2px;
+    position: relative;
+    height: 40px;
+    overflow: hidden;
+  }
+  
+    .Search:before {
+      content:"";
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+.Search-actions {
+  float: right;
+}
+  .Search-actions-search {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background: #2A7F62 url(../img/icon_search.png) no-repeat center center;
+    text-align: center;
+    border: 0;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+.Search-input-txt {
+  margin: 10px 15px;
+  border: 0;    
+  font: 400 15px/1 'Lato';
+  color: #222;
+  width: 70%;
+}
+  .Search-input-txt:focus {
+    outline: none;
+  }
+
+.Search-action-dropdown {
+  position: absolute;
+  width: 14px;
+  height: 7px;
+  display: block;
+  right: 50px;
+  top: 50%;
+  margin-top: -3px;
+  background: url(../img/icon_arrow.png) no-repeat;
+}
+
+.Search-advanced {
+  border-top: 1px solid rgba(137, 144, 159, .20);
+  padding: 15px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: rgb(255, 255, 255);
+}
+  .Search-advanced-list > li {
+    border-top: 1px solid rgba(137, 144, 159, .20);
+    padding: 15px 0;
+  }
+  .Search-advanced-list > li:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+  .Search-advanced-list > li:last-child {
+    padding-bottom: 0;
+  }
+
+.Search-advanced-label {
+  font: 300 11px 'Lato';
+  font-style: italic;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  opacity: .5
+}
+
+.Search-advanced-list .active  .Search-advanced-label {
+  opacity: 1;
+}
+
+
+.Search-advanced-txt {
+  display: inline-block;
+  vertical-align: middle;
+  border: 0;
+}

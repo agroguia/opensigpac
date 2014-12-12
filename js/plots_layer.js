@@ -8,6 +8,7 @@ function PlotsLayer(map, tiledLayer, template) {
   this.geometriesCount = {}
   this.geometries = {}
   this.tile = {}
+  this._interactionEnabled = true;
 
   var zxyRe = /\/(\d+)[\/\.](\d+)[\/\.](\d+)\..../;
 
@@ -55,7 +56,23 @@ function PlotsLayer(map, tiledLayer, template) {
   })
 }
 
-PlotsLayer.MAX_ZOOM = 14;
+PlotsLayer.MAX_ZOOM = 15;
+PlotsLayer.DEFAULT_STYLE = {
+  fillOpacity: 0,
+  stroke: true,
+  weight: 1.5,
+  color: '#000',
+  fill: false
+}
+
+PlotsLayer.DEFAULT_STYLE_HOVER = {
+  fill: true,
+  fillOpacity: 0.5,
+  fillColor: '#FFF',
+  stroke: true,
+  weight: 2.5,
+  color: '#C00'
+}
 
 PlotsLayer.prototype = {
 
@@ -73,11 +90,18 @@ PlotsLayer.prototype = {
     });
   },
 
+  interaction: function(_) {
+    this._interactionCallback = _;
+    return this;
+  },
+
   removeAll: function() {
     var self = this;
     _.each(this.geometries, function(g) {
       self.map.removeLayer(g);
     });
+    self.geometriesCount = {}
+    self.tile = {}
   },
 
   onTileLoaded: function(geojson, z, x, y) {
@@ -97,9 +121,52 @@ PlotsLayer.prototype = {
             });
           }
         }).addTo(self.map);
+        layerGeo.attributes = geo.Attributes;
+        layerGeo.id = geo.ID;
+        layerGeo.setStyle(PlotsLayer.DEFAULT_STYLE)
+        self.addInteraction(layerGeo);
         self.geometries[geo.ID] = layerGeo;
       }
     });
+  },
+
+  addInteraction: function(geo) {
+    var self = this;
+    geo.on('click', function(e) { 
+      if (!self._interactionEnabled) return;
+      var a = geo.attributes;
+      self._interactionCallback && self._interactionCallback(
+      {
+        provincia: a[0],
+        municipio: a[1],
+        aggr: a[2],
+        zona: a[3],
+        poligono: a[4],
+        parcela: a[5],
+        recinto: a[6],
+        latLng: e.latlng
+      });
+    });
+    geo.on('mouseover', function() { 
+      if (!self._interactionEnabled) return;
+      if (geo.hovered) return;
+      geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
+      geo.hovered = true;
+    })
+    geo.on('mouseout', function() { 
+      if (!self._interactionEnabled) return;
+      if (!geo.hovered) return;
+      geo.hovered = false;
+      geo.setStyle(PlotsLayer.DEFAULT_STYLE)
+    })
+  },
+
+  enableInteraction: function() {
+    this._interactionEnabled = true;
+  }, 
+
+  disableInteraction: function() {
+    this._interactionEnabled = false;
   }
 
 
