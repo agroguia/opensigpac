@@ -5,7 +5,8 @@ var opensigpac = function() {
   var map = new L.Map('map', {
     zoomControl: true,
     center: [41.652947, -4.728388],
-    zoom: 12
+    zoom: 12,
+    unloadInvisibleTiles: true
   });
 
   function drawStart() {
@@ -25,7 +26,8 @@ var opensigpac = function() {
 
   var satellite = L.tileLayer(SATELLITE, {
     attribution: 'MAPA',
-    tms: true
+    tms: true,
+    unloadInvisibleTiles: true
   });
 
   var plots = new PlotsLayer(map, satellite, 'http://opensigpac.cartodb.net/vectorsdg/vector/RECINTO@3857/{z}.{x}.{y}.gzip');
