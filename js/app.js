@@ -11,5 +11,10 @@ var opensigpac = function() {
   });
   layer.addTo(map);
     
-  autocomplete_addr($("#localidad"), function() {});
+  autocomplete_addr($("#localidad"), function() {
+      var latlng = L.latLng(selected_address.lat, selected_address.lng);
+      map.panTo(latlng);
+      map.setZoom(16);
+    });
+
 }
