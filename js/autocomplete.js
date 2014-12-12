@@ -9,6 +9,7 @@ var poligonos = [];
 var parcelas = [];
 
 var selected_address;
+var selected_pol;
 
 
 function autocomplete(map) {
@@ -44,10 +45,13 @@ function autocomplete(map) {
                 var latlng = L.latLng(selected_address.lat, selected_address.lng);
                 map.panTo(latlng);
                 map.setZoom(16);
-
+                $('.Search-advanced').show();
                 console.log(selected_address);
 
+                // TODO: Not always 0,0!!
                 var url = "http://opensigpac.cartodb.net/vectorsdg/query/poligonos/" + selected_address.provincia_id + "/" + selected_address.id + "/0/0.gzip"
+                
+                console.log("URL TO GET POLYGONS: " + url);
 
                 $.ajax({
                     url: url, // 'test/15.15949.20555',
@@ -56,9 +60,30 @@ function autocomplete(map) {
                     processData: false,
                     success: function(data){
                         data = Base64Binary.decodeArrayBuffer(data);
+                        
                         var stuff = IO.BinaryGeometrySerializer.Read(data);
-
-                        console.log("POLYGONS:" + stuff);
+                    
+                        
+                        for(var i = 0;i < stuff.length; i++) {
+                            console.log("POLYGON " + i + ":" + JSON.stringify(stuff[i]));
+                            
+                            poligonos.push({
+                                label: stuff[i].Attributes[0],
+                                value: stuff[i].Attributes[0]
+                            })
+                        }
+                        
+                        $("#poligono").autocomplete({
+                            source: poligonos,
+                            minLength: 1,
+                            select: function( event, ui ) {
+                                selected_pol = ui.item.value
+                                console.log("SELECTED POL: " + selected_pol)
+                            },
+                            position: {
+                                offset: "96 5"
+                            }
+                        })
                     }
                 });
             },
