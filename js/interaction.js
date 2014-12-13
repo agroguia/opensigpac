@@ -58,7 +58,9 @@ function interaction(obj, callback) {
           }
         } 
       });
-      
+
+      res["uso"] = res["uso"] + " - " + window.usos_sigpac[res["uso"]];
+
       var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id={provincia},{municipio},{aggr},{zona},{poligono},{parcela},{recinto}';
       for (var k in obj) {
         url = url.replace('{' + k + '}', obj[k]);
@@ -70,6 +72,11 @@ function interaction(obj, callback) {
         parse_check_recinto_capa(url, 'zepa', res),
         parse_check_recinto_capa(url, 'nitratos', res)
       ).done(function(a, b, c) {
+        var datos_url = "http://sigpac.magrama.es/fega/ServiciosVisorSigpac/PrintDocument.aspx?layer=recinto&id={provincia},{municipio},{aggr},{zona},{poligono},{parcela},{recinto}&visibleLayers=recinto;recinto&etiquetas=true";
+        for (var k in obj) {
+          datos_url = datos_url.replace('{' + k + '}', obj[k]);
+        }
+        res["datos"] = "<a href='" + datos_url + "' target='_blank'>" + datos_url  + "</a>"
         callback(res);
       });
     }

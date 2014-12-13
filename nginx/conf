@@ -11,6 +11,7 @@ server {
 
   proxy_cache one;
 
+  add_header Access-Control-Allow-Origin *;
   location ~* \.(json)$ {
     gzip_static on;
     break;
