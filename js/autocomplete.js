@@ -102,14 +102,14 @@ function autocomplete(map) {
                       })
                   }
                   
-                  $("#poligono").autocomplete({
-                      source: poligonos,
-                      minLength: 1,
-                      select: function( event, ui ) {
-                          selected_pol = ui.item.value
-                          console.log("SELECTED POL: " + selected_pol)
-                      }
-                  })
+                  // $("#poligono").autocomplete({
+                  //     source: poligonos,
+                  //     minLength: 1,
+                  //     select: function( event, ui ) {
+                  //         selected_pol = ui.item.value
+                  //         console.log("SELECTED POL: " + selected_pol)
+                  //     }
+                  // })
               }
           });
       }
