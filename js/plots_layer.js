@@ -132,6 +132,11 @@ PlotsLayer.prototype = {
 
   addInteraction: function(geo) {
     var self = this;
+    // disable on mousemove
+    geo.eachLayer(function(layer) {
+      self.map.off('mousemove', layer._onMouseMove, layer);
+      self.map.on('mousemove', _.throttle(layer._onMouseMove, 100), layer);
+    });
     geo.on('click', function(e) { 
       if (!self._interactionEnabled) return;
       var a = geo.attributes;
