@@ -90,6 +90,8 @@ html, body, #map {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background: rgb(255, 255, 255);
+  font: 400 16px/1 'Lato';
+  font-size: 16px;
 }
   .Search-advanced-list > li {
     border-top: 1px solid rgba(137, 144, 159, .20);
@@ -120,8 +122,18 @@ html, body, #map {
 .Search-advanced-txt {
   display: inline-block;
   vertical-align: middle;
-  border: 0;
+  border: 0;    
+  color: #222;
+  max-width: 318px;
+  padding: 0px 15px;
+  line-height: 38px;
+  font: 400 15px/1 'Lato';
+  font-size: 16px;
 }
+
+.Search-advanced-txt:focus {
+    outline: none;
+  }
 
 ul.ui-autocomplete { 
   max-width: none !important; 
