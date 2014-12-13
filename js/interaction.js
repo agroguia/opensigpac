@@ -36,7 +36,6 @@ function interaction(obj, callback) {
   for (var k in obj) {
     url = url.replace('{' + k + '}', obj[k]);
   }
-  debugger;
 
    var uso = ["provincia", "municipio", "agregado", "zona", "poligono", "parcela", "recinto", "superficie", "pendiente", "coef_regadio", "admisibilidad_pastos", "incidencias", "uso"];
 
@@ -61,8 +60,6 @@ function interaction(obj, callback) {
         parse_check_recinto_capa(url, 'zepa', res),
         parse_check_recinto_capa(url, 'nitratos', res)
       ).done(function(a, b, c) {
-        console.log(':D');
-        debugger;
         callback(res);
       });
     }
