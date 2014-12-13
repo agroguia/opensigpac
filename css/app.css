@@ -163,6 +163,20 @@ html, body, #map {
   outline: none;
 }
 
+.search-advanced-alerts{
+  /*display: none;*/
+  color: #ce6444;
+}
+
+.search-advanced-alerts-content{
+  padding-left: 60px;
+}
+
+.search-advanced-alerts-content img{
+  float: left;
+  margin-left: -60px;
+}
+
 ul.ui-autocomplete { 
   max-width: none !important; 
   left: 0 !important;
