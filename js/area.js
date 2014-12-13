@@ -1,6 +1,7 @@
 
 
 function areaControls(map, drawStart, drawStop) {
+  var layer = null;
   var featureGroup = L.featureGroup().addTo(map);
   var drawControl = new L.Control.Draw({
     /*edit: {
@@ -24,9 +25,18 @@ function areaControls(map, drawStart, drawStop) {
   function showPolygonArea(e) {
     featureGroup.clearLayers();
     featureGroup.addLayer(e.layer);
-    e.layer.bindPopup((LGeo.area(e.layer) / 1000000).toFixed(2) + ' km<sup>2</sup>');
+    e.layer.bindPopup(
+      (LGeo.area(e.layer) / 10000).toFixed(2) + ' Ha'
+    );
     e.layer.openPopup();
+    layer = e.layer;
   }
+  map.on('click', function() {
+    if (layer) {
+      featureGroup.removeLayer(layer);
+    }
+
+  });
 
   map.on('draw:created', showPolygonArea);
   map.on('draw:edited', showPolygonAreaEdited);
