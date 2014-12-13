@@ -58,7 +58,11 @@ function interaction(obj, callback) {
         } 
       });
       
-      var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id=19,52,0,0,1,1141,1';
+      var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id={provincia},{municipio},{aggr},{zona},{poligono},{parcela},{recinto}';
+      for (var k in obj) {
+        url = url.replace('{' + k + '}', obj[k]);
+      }
+      //var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id=19,52,0,0,1,1141,1';
       // I will burn in hell for this. But javascript will burn with me
       $.when(
         parse_check_recinto_capa(url, 'lic', res),
