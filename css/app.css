@@ -117,6 +117,8 @@ html, body, #map {
   vertical-align: middle;
   margin-right: 8px;
   opacity: .5;
+  width: 100%;
+  max-width: 320px;
 }
 
 .Search-advanced-list input {
@@ -124,6 +126,8 @@ html, body, #map {
   padding: 0;
   line-height: 40px;
   height: 40px;
+  width: 40px;
+  text-align: right;
 }
 
 .Search-advanced-list .active  .Search-advanced-label {
@@ -211,4 +215,9 @@ ul.ui-autocomplete li:first-child {
 
 ul.ui-autocomplete li a{
   cursor: pointer;
+}
+
+div.cartodb-popup div.cartodb-popup-content-wrapper {
+width: 230px !important;
+max-width: 230px !important;
 }

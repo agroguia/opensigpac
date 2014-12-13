@@ -104,6 +104,7 @@ function createInfowindow(map) {
 }
 
 function openInfowindow(infowindow, pos, data) {
+  $('.Search-advanced').hide();
   console.log(data);
   infowindow.set("latlng", [pos.lat, pos.lng]);
   var fields = []
@@ -118,12 +119,13 @@ function openInfowindow(infowindow, pos, data) {
       })
     }
   }
+
   infowindow.set({
-    content:  {
+    content: {
       fields: fields
     },
     data: {},
     visibility: true
   });
 
-}
+}
