@@ -57,4 +57,11 @@ var opensigpac = function() {
   // Autocomplete stuff. We need the map to center the view after a search
   autocomplete(map);
 
+  $('.Search-advanced-list input').on('focus', function(e) {
+    $(this).closest('li').addClass('active');
+  });
+
+  $('.Search-advanced-list input').on('blur', function(e) {
+    $(this).closest('li').removeClass('active');
+  });
 };

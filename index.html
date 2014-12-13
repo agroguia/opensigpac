@@ -26,20 +26,26 @@
 
       <div class="Search-advanced">
         <ul class="Search-advanced-list">
-          <li class="active">
-           <span class="Search-advanced-label">Polígono</span>
-            <input id="poligono" type="number" name="text" class="Search-advanced-txt ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+          <li>
+           <label class="Search-advanced-label" for="poligono">Polígono</label>
+            <input id="poligono" type="number" name="poligono" class="Search-advanced-txt ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
           </li>
 
           <li>
-            <span class="Search-advanced-label">Parcela</span>
-            <input id="parcela" type="number" name="text" class="Search-advanced-txt ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+            <label class="Search-advanced-label" for="parcela">Parcela</label>
+            <input id="parcela" type="number" name="parcela" class="Search-advanced-txt ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
           </li>
+
           <!--<li>
             <span class="Search-advanced-label">Recinto</span>
             <input type="text" name="text" class="Search-advanced-txt" value="Villanueva" />
           </li>-->
+          <li class="search-advanced-alerts">
+            <p class="search-advanced-alerts-content"><img src="img/icon-alert.png">Para localizar la parcela necesitas introducir identificadores de polígono y parcela válidos</p>
+          </li>
         </ul>
+
+        <button class="Search-advanced-button">Buscar parcela</button>
       </div>
     </div>
 
@@ -73,5 +79,21 @@
       // you could use $(window).load(main);
       window.onload = main;
     </script>
+
+    <!-- script type="infowindow/html" id="infowindow_template">
+      <div class="cartodb-popup">
+        <a href="#close" class="cartodb-popup-close-button close">x</a>
+         <div class="cartodb-popup-content-wrapper">
+           <div class="cartodb-popup-header">
+             <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
+           </div>
+           <div class="cartodb-popup-content">
+             <h4>City: </h4>
+             <p>{{content.data.name}}</p>
+           </div>
+         </div>
+         <div class="cartodb-popup-tip-container"></div>
+      </div>
+    </script -->
   </body>
 </html>
