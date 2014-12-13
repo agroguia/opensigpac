@@ -9,7 +9,7 @@ function parse_check_recinto_capa(url, query_type, layers_hash) {
         var text = $(res).find("span#lblConsulta").text();
         if (text.indexOf("El Recinto no solapa con la capa") != -1) {
           //var value = null;
-          var value = "N/A";
+          var value = "No solapa";
         }
         else {
           if (query_type == "zepa") {
@@ -36,7 +36,6 @@ function interaction(obj, callback) {
   for (var k in obj) {
     url = url.replace('{' + k + '}', obj[k]);
   }
-  debugger;
 
    var uso = ["provincia", "municipio", "agregado", "zona", "poligono", "parcela", "recinto", "superficie", "pendiente", "coef_regadio", "admisibilidad_pastos", "incidencias", "uso"];
 
@@ -50,19 +49,26 @@ function interaction(obj, callback) {
       var res = {};
       _.each(uso, function(item, index) { 
         if(item != null) {
-          res[item] = geojson["Attributes"][index]
+          if(geojson["Attributes"][index] != null && geojson["Attributes"][index] != "") {
+            res[item] = geojson["Attributes"][index]
+          }
+          else {
+            res[item] = "No disponible"
+          }
         } 
       });
       
-      var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id=19,52,0,0,1,1141,1';
+      var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id={provincia},{municipio},{aggr},{zona},{poligono},{parcela},{recinto}';
+      for (var k in obj) {
+        url = url.replace('{' + k + '}', obj[k]);
+      }
+      //var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id=19,52,0,0,1,1141,1';
       // I will burn in hell for this. But javascript will burn with me
       $.when(
         parse_check_recinto_capa(url, 'lic', res),
         parse_check_recinto_capa(url, 'zepa', res),
         parse_check_recinto_capa(url, 'nitratos', res)
       ).done(function(a, b, c) {
-        console.log(':D');
-        debugger;
         callback(res);
       });
     }

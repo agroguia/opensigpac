@@ -132,6 +132,11 @@ PlotsLayer.prototype = {
 
   addInteraction: function(geo) {
     var self = this;
+    // disable on mousemove
+    geo.eachLayer(function(layer) {
+      self.map.off('mousemove', layer._onMouseMove, layer);
+      self.map.on('mousemove', _.throttle(layer._onMouseMove, 100), layer);
+    });
     geo.on('click', function(e) { 
       if (!self._interactionEnabled) return;
       var a = geo.attributes;
@@ -150,14 +155,14 @@ PlotsLayer.prototype = {
     geo.on('mouseover', function() { 
       if (!self._interactionEnabled) return;
       if (geo.hovered) return;
-      geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
+      //geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
       geo.hovered = true;
     })
     geo.on('mouseout', function() { 
       if (!self._interactionEnabled) return;
       if (!geo.hovered) return;
       geo.hovered = false;
-      geo.setStyle(PlotsLayer.DEFAULT_STYLE)
+      //geo.setStyle(PlotsLayer.DEFAULT_STYLE)
     })
   },
 
