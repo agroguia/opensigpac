@@ -1,3 +1,10 @@
+html, body, #map {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font: 400 16px/1 'Lato';
+  font-size: 16px;
+}
 .Search {
   /*background: rgb(255, 255, 255);*/
   position: absolute;
@@ -43,11 +50,13 @@
   }
 
 .Search-input-txt {
-  margin: 10px 15px;
-  border: 0;    
-  font: 400 15px/1 'Lato';
+  padding: 14px 15px;
+  border: 0;
   color: #222;
   width: 70%;
+  padding: 0px 15px;
+  line-height: 40px;
+  font-size: 16px;
 }
   .Search-input-txt:focus {
     outline: none;
@@ -103,3 +112,34 @@
   vertical-align: middle;
   border: 0;
 }
+
+ul.ui-autocomplete { 
+  max-width: none !important; 
+  left: 80px !important;
+  width: 360px !important;
+  top: 40px !important;
+/*
+  position: absolute; 
+  display: block; 
+  width: 250px; 
+  margin-top: 10px; 
+  
+  height: auto; 
+  max-height: 200px; 
+  background: white; 
+  z-index: 1000!important; 
+  -webkit-border-radius: 3px; 
+  -moz-border-radius: 3px; 
+  -ms-border-radius: 3px; 
+  -o-border-radius: 3px; 
+  border-radius: 3px; 
+  border: 1px solid #999999; 
+  overflow-y: auto; 
+  */
+}
+
+ul.ui-autocomplete li a{
+  cursor: pointer;
+}
+
+
