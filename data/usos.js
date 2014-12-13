@@ -1,0 +1,1 @@
+opensigpac_usos();
