@@ -85,12 +85,15 @@ html, body, #map {
 
 
 .Search-advanced {
+  width: auto;
+  overflow: hidden;
   position: relative;
   top: -2px;
   max-width: 400px;
   display: none;
   border-top: 1px solid rgba(137, 144, 159, .20);
   padding: 0 15px;
+  padding-bottom: 10px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background: rgb(255, 255, 255);
@@ -133,6 +136,19 @@ html, body, #map {
   display: inline-block;
   vertical-align: middle;
   border: 0;
+}
+
+.Search-advanced-button {
+  float: right;
+  border-radius: 2px;
+  background: #2A7F62;
+  text-align: center;
+  border: 0;
+  height: 40px;
+  padding: 0 15px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 ul.ui-autocomplete { 
