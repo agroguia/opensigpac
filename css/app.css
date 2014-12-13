@@ -164,7 +164,7 @@ html, body, #map {
 }
 
 .search-advanced-alerts{
-  /*display: none;*/
+  display: none;
   color: #ce6444;
 }
 
