@@ -59,6 +59,8 @@ function interaction(obj, callback) {
         } 
       });
 
+      res["uso"] = res["uso"] + " - " + window.usos_sigpac[res["uso"]];
+
       var url = 'http://opensigpac.cartodb.net/fega/ServiciosVisorSigpac/query.aspx?layer=recinto&id={provincia},{municipio},{aggr},{zona},{poligono},{parcela},{recinto}';
       for (var k in obj) {
         url = url.replace('{' + k + '}', obj[k]);

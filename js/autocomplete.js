@@ -42,6 +42,18 @@ function opensigpac_municipio(data) {
   });
 }
 
+var usos_sigpac = {}
+function opensigpac_usos() {
+  $.ajax({
+    url: "http://opensigpac.cartodb.net/usos_sigpac.json",
+    type: "GET",
+    processData: false,
+    success: function(data){
+      usos_sigpac = data;
+    }
+  });
+}
+
 
 function autocomplete(map) {
     
