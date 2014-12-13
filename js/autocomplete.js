@@ -11,6 +11,9 @@ var parcelas = [];
 var selected_address;
 var selected_pol;
 var municipios = [];
+var municipios_names = {}
+var provincias_ids = {}
+var provincias_names = {}
 
 // this is called from data/municipios.js
 function opensigpac_municipio(data) {
@@ -26,7 +29,16 @@ function opensigpac_municipio(data) {
         id: r.id,
         provincia_id: r.provincia_id
       }
-    });     
+    });
+    //if doesnt exist yet
+    if (!(r.provincia_id in provincias_ids)) {
+      provincias_ids[r.provincia_id] = {}
+      provincias_ids[r.provincia_id]['name'] = [r.provincia]
+      provincias_ids[r.provincia_id]['municipios'] = {}
+    }
+    provincias_ids[r.provincia_id]['municipios'][r.id] = r.poblacion
+    municipios_names[r.poblacion] = r.id;
+    provincias_names[r.provincia] = r.provincia_id;
   });
 }
 
