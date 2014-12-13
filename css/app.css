@@ -17,7 +17,9 @@ html, body, #map {
   position: absolute;
   top: 20px;
   left: 20px;
-  right: 20px;
+  float: left;
+  max-width: 400px;
+  width: 90%;
 }
   .Search-input {
     border: 1px solid rgba(0, 0, 0, .2);
@@ -56,6 +58,8 @@ html, body, #map {
   padding: 0px 15px;
   line-height: 38px;
   font-size: 16px;
+  width: 100%;
+
 }
   .Search-input-txt:focus {
     outline: none;
@@ -94,6 +98,7 @@ html, body, #map {
   .Search-advanced-list > li {
     border-top: 1px solid rgba(137, 144, 159, .20);
     padding: 15px 0;
+    position: relative;
   }
   .Search-advanced-list > li:first-child {
     border-top: none;
@@ -110,6 +115,10 @@ html, body, #map {
   vertical-align: middle;
   margin-right: 8px;
   opacity: .5
+}
+
+.Search-advanced-list input {
+  float: right;
 }
 
 .Search-advanced-list .active  .Search-advanced-label {
