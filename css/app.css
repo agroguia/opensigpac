@@ -22,18 +22,17 @@ html, body, #map {
   width: 90%;
 }
   .Search-input {
-    border: 1px solid rgba(0, 0, 0, .2);
     max-width: 400px;
     background: #fff;
     border-radius: 2px;
     position: relative;
     height: 40px;
+    z-index: 10;
+    box-shadow: 0 0 2px rgba(0,0,0,.3);
   }
 
 .Search-actions {
   float: right;
-  margin-top: -1px;
-  margin-right: -1px;
   overflow: hidden;
 }
   .Search-actions-search {
@@ -52,11 +51,10 @@ html, body, #map {
 .Search-input-txt {
   float: left;
   border: 0;
-  font: 400 15px/1 'Lato';
+  font: 400 15px/38px 'Lato';
   color: #222;
   max-width: 318px;
   padding: 0px 15px;
-  line-height: 38px;
   font-size: 16px;
   width: 100%;
 
@@ -87,18 +85,20 @@ html, body, #map {
 
 
 .Search-advanced {
+  position: relative;
+  top: -2px;
   max-width: 400px;
   display: none;
   border-top: 1px solid rgba(137, 144, 159, .20);
-  padding: 15px;
+  padding: 0 15px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background: rgb(255, 255, 255);
 }
   .Search-advanced-list > li {
     border-top: 1px solid rgba(137, 144, 159, .20);
-    padding: 15px 0;
     position: relative;
+    height: 42px;
   }
   .Search-advanced-list > li:first-child {
     border-top: none;
@@ -109,16 +109,19 @@ html, body, #map {
   }
 
 .Search-advanced-label {
-  font: 300 11px 'Lato';
+  font: 300 13px/42px 'Lato';
   font-style: italic;
   display: inline-block;
   vertical-align: middle;
   margin-right: 8px;
-  opacity: .5
+  opacity: .5;
 }
 
 .Search-advanced-list input {
   float: right;
+  padding: 0;
+  line-height: 40px;
+  height: 40px;
 }
 
 .Search-advanced-list .active  .Search-advanced-label {
