@@ -9,7 +9,7 @@ function parse_check_recinto_capa(url, query_type, layers_hash) {
         var text = $(res).find("span#lblConsulta").text();
         if (text.indexOf("El Recinto no solapa con la capa") != -1) {
           //var value = null;
-          var value = "N/A";
+          var value = "No solapa";
         }
         else {
           if (query_type == "zepa") {
@@ -49,7 +49,12 @@ function interaction(obj, callback) {
       var res = {};
       _.each(uso, function(item, index) { 
         if(item != null) {
-          res[item] = geojson["Attributes"][index]
+          if(geojson["Attributes"][index] != null && geojson["Attributes"][index] != "") {
+            res[item] = geojson["Attributes"][index]
+          }
+          else {
+            res[item] = "No disponible"
+          }
         } 
       });
       
