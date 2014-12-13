@@ -155,14 +155,14 @@ PlotsLayer.prototype = {
     geo.on('mouseover', function() { 
       if (!self._interactionEnabled) return;
       if (geo.hovered) return;
-      geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
+      //geo.setStyle(PlotsLayer.DEFAULT_STYLE_HOVER)
       geo.hovered = true;
     })
     geo.on('mouseout', function() { 
       if (!self._interactionEnabled) return;
       if (!geo.hovered) return;
       geo.hovered = false;
-      geo.setStyle(PlotsLayer.DEFAULT_STYLE)
+      //geo.setStyle(PlotsLayer.DEFAULT_STYLE)
     })
   },
 
