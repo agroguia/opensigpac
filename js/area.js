@@ -7,6 +7,7 @@ function areaControls(map, drawStart, drawStop) {
     /*edit: {
       featureGroup: featureGroup
     },*/
+    position: 'bottomleft',
     draw: {
       polygon: true,
       polyline: false,

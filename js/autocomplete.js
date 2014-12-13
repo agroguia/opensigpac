@@ -66,6 +66,7 @@ function autocomplete(map) {
 
 
     $("#localidad").autocomplete({
+      appendTo: "#Search-input",
       source: municipios,
       minLength: 2,
       select: function( event, ui ) {
@@ -107,16 +108,10 @@ function autocomplete(map) {
                       select: function( event, ui ) {
                           selected_pol = ui.item.value
                           console.log("SELECTED POL: " + selected_pol)
-                      },
-                      position: {
-                          offset: "96 5"
                       }
                   })
               }
           });
-      },
-      position: {
-          offset: "96 5"
       }
     });
 }

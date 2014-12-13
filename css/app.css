@@ -1,3 +1,9 @@
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html, body, #map {
   height: 100%;
   padding: 0;
@@ -5,36 +11,28 @@ html, body, #map {
   font: 400 16px/1 'Lato';
   font-size: 16px;
 }
+
 .Search {
   /*background: rgb(255, 255, 255);*/
   position: absolute;
-  top: 10px;
-  left: 80px;
+  top: 20px;
+  left: 20px;
+  right: 20px;
 }
   .Search-input {
-    width: 400px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    max-width: 400px;
     background: #fff;
     border-radius: 2px;
     position: relative;
     height: 40px;
-    overflow: hidden;
   }
-  
-    .Search:before {
-      content:"";
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      left: -1px;
-      border: 1px solid rgba(0, 0, 0, .2);
-      border-radius: 2px;
-      pointer-events: none;
-      z-index: 2;
-    }
 
 .Search-actions {
   float: right;
+  margin-top: -1px;
+  margin-right: -1px;
+  overflow: hidden;
 }
   .Search-actions-search {
     border-top-right-radius: 2px;
@@ -50,12 +48,13 @@ html, body, #map {
   }
 
 .Search-input-txt {
-  padding: 14px 15px;
+  float: left;
   border: 0;
+  font: 400 15px/1 'Lato';
   color: #222;
-  width: 70%;
+  max-width: 318px;
   padding: 0px 15px;
-  line-height: 40px;
+  line-height: 38px;
   font-size: 16px;
 }
   .Search-input-txt:focus {
@@ -63,17 +62,28 @@ html, body, #map {
   }
 
 .Search-action-dropdown {
+  float: right;
+  margin-top: -3px;
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+
+.Search-action-dropdown:after {
+  content: "";
   position: absolute;
+  margin-top: -3px;
   width: 14px;
   height: 7px;
   display: block;
   right: 50px;
   top: 50%;
-  margin-top: -3px;
   background: url(../img/icon_arrow.png) no-repeat;
 }
 
+
 .Search-advanced {
+  max-width: 400px;
   display: none;
   border-top: 1px solid rgba(137, 144, 159, .20);
   padding: 15px;
@@ -115,9 +125,9 @@ html, body, #map {
 
 ul.ui-autocomplete { 
   max-width: none !important; 
-  left: 80px !important;
-  width: 360px !important;
+  left: 0 !important;
   top: 40px !important;
+  width: 100% !important;
 /*
   position: absolute; 
   display: block; 
@@ -141,5 +151,3 @@ ul.ui-autocomplete {
 ul.ui-autocomplete li a{
   cursor: pointer;
 }
-
-
