@@ -23,7 +23,6 @@ function parse_check_recinto_capa(url, query_type, layers_hash) {
           }
         }
         layers_hash[query_type]  = value;
-        console.log(value);
         return value;
       }
   });
@@ -47,6 +46,8 @@ function interaction(obj, callback) {
       data = Base64Binary.decodeArrayBuffer(data);
       var geojson = IO.BinaryGeometrySerializer.Read(data)[0];
       var res = {};
+      res['Provincia'] = obj['provincia'] + " - " + window.provincias_ids[obj['provincia']]['name']
+      res['Municipio'] = obj['municipio'] + " - " + window.provincias_ids[obj['provincia']]['municipios'][obj['municipio']]
       _.each(uso, function(item, index) { 
         if(item != null) {
           if(geojson["Attributes"][index] != null && geojson["Attributes"][index] != "") {
